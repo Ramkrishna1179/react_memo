@@ -1,25 +1,33 @@
-import logo from './logo.svg';
-import './App.css';
-
+import { useState } from "react";
+import Child from "./Components/Child";
+import ChildwithMemo from "./Components/Childwith_Memo";
 function App() {
+  const [Count, setCount] = useState(["parent data"]);
+  const [childCount, setchildCount] = useState(["Child data"]);
+  const AddParent = () => {
+    setCount([...Count, "new parent data"]);
+  };
+
+  const AddChild = () => {
+    setchildCount([...childCount, "new child data"]);
+  };
+
+ 
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <ChildwithMemo />
+      <Child sendData={childCount} />
+      {Count.map((todo, index) => (
+        <li key={index}>{todo}</li>
+      ))}
+
+      <button onClick={AddParent}>Add parent data</button>
+      <button onClick={AddChild}>Add child data</button>
     </div>
   );
 }
-
 export default App;
+// <button onClick={ChildMemo}>Check ChildwithMemo</button>
+// const ChildMemo = ()=>{   
+//   }
